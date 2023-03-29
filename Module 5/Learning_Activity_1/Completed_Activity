@@ -1,0 +1,120 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Mar 21 13:49:55 2023
+
+@author: tiamegan
+"""
+
+# EXERCISE 1 - Write a Python program to compute the total cost after discount
+
+unit_price = 100.00                                                                     # Price Per Unit
+discount = 10/100                                                                       # Discount Percentage
+
+print("S A L E")
+print("$100 per item.\nSPEND $1000 for 10% Discount! TODAY ONLY!\n")
+unit_purchased = int(input("How many items would you like to buy? : "))                 # Ask and retrive how many units are purchased
+
+cost = float(unit_purchased * unit_price)                                               # Calculate the float for the total of units purchased by how much
+discount_applied = float(cost * discount)                                               # Calculate the discount from the total purchased
+
+if cost >= 1000 :                                                                       # If $1000 or more is spent do this....
+    print("You have purchased", unit_purchased, "items at $%.2f each" %unit_price)
+    print ("**Discount Applied.")                                                       # Inform that discount has been applied
+    discount_price = cost - discount_applied                                            # Calculate discount price from cost and subtract discount applied
+    print("Total payable: $%.2f" %discount_price)                                       # Output Total payable minus discount
+    print ("You saved $%.2f" %discount_applied )                                        # Output how much was saved / the discount.
+    
+else :
+    print("You have purchased", unit_purchased, "items at $%.2f each" %unit_price)
+    print ("**Discount Not Applicable.")                                                # If total sale is under $1000, no discount applied.
+    print("Total payable: $%.2f" %cost)
+    
+    
+# -----------------------------------------------------------------------------------------------------------
+# EXERCISE 2 - Write Python program to compute total pay of the week
+
+print("\nCalculate Weekly Pay\n")
+
+hours = float(input("Enter Hours Worked: "))                                                                     # Collect Hours Worked as a Float
+wage = float(input("Enter dollars paied per hour: $"))                                                          # Collect Dollars per hour as a float
+
+if hours <= 40:                                                                                                 # If Hours are 40 or more
+    regular_hours = hours   
+    overtime = 0
+    total = wage*hours                                                                                   # Work out wage but dollars per hour by hours worked
+    print("No Overtime hours.")                                                                               # Output no Overtime hours were calculated
+
+else :      
+    regular_hours = 40                                                                                          # Regular hours is 40
+    overtime = hours - regular_hours                                                                            # Calculate overtime hours by subtracting regular hours
+    
+    overtime_calc = 1.5 * wage                                                                                  # Calculate overtime rate by 1.5 times the normal rate
+    overtime_pay = overtime_calc * overtime                                                                     # Overtime pay calculation by overtime multiplied by overtime calc
+    total = (wage*regular_hours) + overtime_pay                                                                 # Total pay including overtime, regularhours by wage and adding overtime pay
+    
+    print('There was {overtime:.2f} hours at ${overtime_calc:.2f} per additional hour.'.format(**locals()))     # Output Overtime hours found and at what rate
+    print ('Additional pay of ${overtime_pay:.2f}'.format(**locals()))                                          # Output additional pay due to overtime
+    
+print('Wages for {hours} hours at ${wage:.2f} per hour are ${total:.2f}.'.format(**locals()))                   # Output hours worked, and total income recieved
+
+
+# -----------------------------------------------------------------------------------------------------------
+# EXERCISE 3 - Write Python program to find the elegibility to be a Senator or not.
+
+print ("\nUS CONGRESS ELIGIABLITY\n")
+age = int(input("Enter Age of Applicant: "))                                                            # Retrieve Age from User
+borninUS = input("Was the Applicant Born in the United States of America? [Y/N]: ")                     # Find out if Applicant is USA born, relevant later
+
+if borninUS == "Y" or borninUS =="y":                                                                                     # If yes, citizenship is from birth.
+    citizenship = age
+elif borninUS == "N" or borninUS == "n":                                                                                   # If no, citizenship is from application completion
+    applied_citizen = int(input("How old was the applicant when Citizenship Process was completed? : "))
+    citizenship = age - applied_citizen                                                                 # Calculate citizenship from completion age.
+else :
+    print("Invalid Input. Reload Program")
+    
+if age >= 25 and  citizenship >= 7:                                                                     # If applicant is older than 25 with more than 7 years citizienship
+    print ("You eligible only for the House.")                                                          # Applicant is only eligible for House.
+
+elif age >= 30 and citizenship >= 9:                                                                    # If applicant is older than 30 with more than 9 years citizienship
+    print ("You are eligible for both the House and Senate.")                                           # Applicant is eligible for House and Senate.
+
+elif age >= 35  and citizenship >= 14 and borninUS == "Y":                                              # If applicant is older than 35 with more than 14 years citizienship and was born in USA
+    print ("You are eligible for all the House and Senate and Presidency.")                             # Applicant is eligible for House, Senate and Presidency.
+
+else : 
+    print ("You are ineligible for Congress.")                                                          # If doesnt meet critera.
+    
+
+# -----------------------------------------------------------------------------------------------------------
+# EXERCISE 4 - Write Python program to calculate a dog's age in dog years.
+print ("\nDOG AGE CALCULATOR\n")
+human_age = int(input("Input a dog's age in human years: "))                    # Input of Dog age in human years
+
+if human_age < 0:                                                               # Ensure number is not negative
+    print("Age must be a positive number")
+    exit()                                                                      # Exit program if number is negative
+    
+elif human_age <= 2:
+    dog_age = human_age * 10.5                                                  # If age is 2, dog year equals to 10.5 human years
+else :
+    dog_age = 21 + (human_age -2) * 4                                           # After 2, each dog year is 4 human years
+
+print("The dog's age in dog years is:", dog_age)                                # Output age of dog
+
+
+# -----------------------------------------------------------------------------------------------------------
+# EXERCISE 5 - Wite a Python program for checking the speed of drivers.
+print("\nSPEED GUN\n")
+
+speed = int(input("Enter Speed: "))
+
+if speed <= 70:                                                                 # If the speed is less than 70km, it should print “OK”.
+    print("Ok.")
+    
+elif speed >= 70:
+    points = (speed - 70) // 5                                                  # For every 5km above the speed limit (70km), it should give the driver one demerit point.
+    print ('Points = {}'.format(points))                                        # Print the total number of demerit points.
+    if points >= 12 :                                                           # If the driver gets more than 12 points, the function should print “License suspended”.
+        print("License Suspended.")
